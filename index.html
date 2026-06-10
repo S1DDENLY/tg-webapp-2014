@@ -137,6 +137,34 @@
             color: #ffcf6e;
         }
 
+        .music-player {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--tg-theme-button-color, #f7c56e);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .track-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffeaac;
+            margin-bottom: 5px;
+        }
+
+        .track-artist {
+            font-size: 0.9rem;
+            color: #ccaa66;
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+            margin: 10px 0;
+            background: #1f1b10;
+            border-radius: 4px;
+        }
+
         .btn {
             background: #1f1b10;
             border: 3px solid var(--tg-theme-button-color, #f7c56e);
@@ -203,94 +231,12 @@
             font-size: 14px;
         }
         
-        /* Стили для музыкального плеера */
-        .music-player {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid var(--tg-theme-button-color, #f7c56e);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        
-        .track-info {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .track-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffeaac;
-        }
-        
-        .track-artist {
-            font-size: 0.9rem;
-            color: #ccaa66;
-        }
-        
-        audio {
-            width: 100%;
-            margin: 10px 0;
-            background: #1f1b10;
-            border-radius: 4px;
-        }
-        
-        audio::-webkit-media-controls-panel {
-            background-color: #1f1b10;
-        }
-        
-        audio::-webkit-media-controls-current-time-display,
-        audio::-webkit-media-controls-time-remaining-display {
-            color: #ffeaac;
-        }
-        
-        .playlist {
-            margin-top: 15px;
-            text-align: left;
-            border-top: 1px solid #f7c56e33;
-            padding-top: 10px;
-        }
-        
-        .playlist-title {
-            font-size: 0.8rem;
-            color: #ccaa66;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        
-        .playlist-item {
-            padding: 8px;
-            cursor: pointer;
-            border-bottom: 1px solid #f7c56e22;
-            display: flex;
-            justify-content: space-between;
-            transition: 0.1s;
-        }
-        
-        .playlist-item:hover {
-            background: #f7c56e22;
-        }
-        
-        .playlist-item.active {
-            background: #f7c56e33;
-            border-left: 3px solid #f7c56e;
-        }
-        
-        .playlist-item-title {
-            font-size: 0.85rem;
-            color: #ffeaac;
-        }
-        
-        .playlist-item-artist {
-            font-size: 0.7rem;
-            color: #aa9944;
-        }
-        
         @media (max-width: 560px) {
             .card { padding: 20px 14px; }
             .hashtag { font-size: 2.6rem; }
             h1 { font-size: 1.2rem; }
             .btn { font-size: 0.9rem; padding: 6px 16px; }
+            .track-title { font-size: 1rem; }
         }
     </style>
 </head>
@@ -300,25 +246,19 @@
     <div class="sub">14.06.2025 - ?</div>
     <h1>🔥 #2014 — ЭТО НЕ ПРОСТО ТЕГ, ЭТО ЛАЙФСТАЙЛ 🔥</h1>
     
-    <!-- Фотография -->
+    <!-- ФОТОГРАФИЯ -->
     <div class="photo-container">
         <img class="crew-photo" src="https://iili.io/CBdX5NI.png" alt="#2014 Crew">
     </div>
-    
+
     <!-- МУЗЫКАЛЬНЫЙ ПЛЕЕР -->
     <div class="music-player">
-        <div class="track-info">
-            <div class="track-title" id="currentTrack">#14pocalypse Anthem</div>
-            <div class="track-artist" id="currentArtist">#2014 Crew</div>
-        </div>
-        <audio id="audioPlayer" controls>
-            <source id="audioSource" src="" type="audio/mpeg">
-            Твой браузер не поддерживает аудио-плеер :(
+        <div class="track-title">#14pocalypse</div>
+        <div class="track-artist">#2014 Crew</div>
+        <audio controls>
+            <source src="https://s1ddenly.github.io/tg-webapp-2014/audio/2014-anthem.mp3" type="audio/mpeg">
+            Твой браузер не поддерживает аудио-плеер
         </audio>
-        <div class="playlist">
-            <div class="playlist-title">🎵 ПЛЕЙЛИСТ #2014 🎵</div>
-            <div id="playlistContainer"></div>
-        </div>
     </div>
     
     <div class="message">
@@ -352,7 +292,6 @@
 <button class="tg-close" id="closeBtn">✖ ЗАКРЫТЬ</button>
 
 <script>
-    // Инициализация Telegram Web App
     let tg;
     try {
         tg = window.Telegram.WebApp;
@@ -374,146 +313,6 @@
         };
     }
 
-    // ========== МУЗЫКАЛЬНЫЙ ПЛЕЕР ==========
-    // Плейлист #2014 (добавь свои треки сюда!)
-    // Если хочешь свои mp3 — загрузи их в репозиторий и укажи путь
-    // Или используй прямые ссылки на mp3 (например, с Яндекс.Диска, Dropbox и т.д.)
-    const playlist = [
-        {
-            title: "#14pocalypse",
-            artist: "#2014 Crew",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        },
-        {
-            title: "Новая Волна",
-            artist: "#2014 x Ninthsin",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-        },
-        {
-            title: "Андеграунд",
-            artist: "Mynt & Uppedkid",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-        },
-        {
-            title: "Бит 808",
-            artist: "Kingstrals",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-        },
-        {
-            title: "Уличная Поэзия",
-            artist: "Vaniaxx",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
-        },
-        {
-            title: "14pocalypse (Remix)",
-            artist: "#2014 All Stars",
-            url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
-        }
-    ];
-    
-    let currentTrackIndex = 0;
-    const audioPlayer = document.getElementById('audioPlayer');
-    const audioSource = document.getElementById('audioSource');
-    const currentTrackSpan = document.getElementById('currentTrack');
-    const currentArtistSpan = document.getElementById('currentArtist');
-    const playlistContainer = document.getElementById('playlistContainer');
-    
-    // Функция загрузки трека
-    function loadTrack(index) {
-        if (index >= 0 && index < playlist.length) {
-            currentTrackIndex = index;
-            const track = playlist[currentTrackIndex];
-            currentTrackSpan.textContent = track.title;
-            currentArtistSpan.textContent = track.artist;
-            audioSource.src = track.url;
-            audioPlayer.load();
-            
-            // Обновляем активный элемент в плейлисте
-            document.querySelectorAll('.playlist-item').forEach((item, i) => {
-                if (i === currentTrackIndex) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Автоматически играем (в некоторых браузерах может не работать без взаимодействия)
-            // audioPlayer.play();
-        }
-    }
-    
-    // Создание плейлиста в HTML
-    function buildPlaylist() {
-        playlistContainer.innerHTML = '';
-        playlist.forEach((track, index) => {
-            const trackElement = document.createElement('div');
-            trackElement.className = 'playlist-item';
-            if (index === currentTrackIndex) trackElement.classList.add('active');
-            trackElement.innerHTML = `
-                <div>
-                    <div class="playlist-item-title">${track.title}</div>
-                    <div class="playlist-item-artist">${track.artist}</div>
-                </div>
-                <div style="color:#aa9944;">▶</div>
-            `;
-            trackElement.onclick = () => {
-                loadTrack(index);
-                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-            };
-            playlistContainer.appendChild(trackElement);
-        });
-    }
-    
-    // Следующий трек
-    function nextTrack() {
-        let nextIndex = currentTrackIndex + 1;
-        if (nextIndex >= playlist.length) nextIndex = 0;
-        loadTrack(nextIndex);
-        audioPlayer.play();
-    }
-    
-    // Предыдущий трек
-    function prevTrack() {
-        let prevIndex = currentTrackIndex - 1;
-        if (prevIndex < 0) prevIndex = playlist.length - 1;
-        loadTrack(prevIndex);
-        audioPlayer.play();
-    }
-    
-    // Автопереключение при окончании трека
-    audioPlayer.addEventListener('ended', () => {
-        nextTrack();
-    });
-    
-    // Строим плейлист и загружаем первый трек
-    buildPlaylist();
-    loadTrack(0);
-    
-    // Винил тоже управляет музыкой (play/pause)
-    const vinyl = document.getElementById('vinylPlayer');
-    let isPlaying = false;
-    
-    vinyl.onclick = () => {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            isPlaying = true;
-            tg.showAlert('🎧 #14pocalypse заиграл!');
-        } else {
-            audioPlayer.pause();
-            isPlaying = false;
-        }
-        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-    };
-    
-    // Обновляем состояние винила при паузе/воспроизведении
-    audioPlayer.addEventListener('play', () => {
-        isPlaying = true;
-    });
-    
-    audioPlayer.addEventListener('pause', () => {
-        isPlaying = false;
-    });
-    
     // Кнопка отправки данных боту
     document.getElementById('sendDataBtn').onclick = () => {
         try {
@@ -529,7 +328,7 @@
             tg.showAlert('Ошибка, но мы всё равно рады тебе! 🔥');
         }
     };
-    
+
     // Кнопка празднования
     document.getElementById('celebrateBtn').onclick = () => {
         showConfetti(40);
@@ -542,12 +341,8 @@
             }, 2500);
         }
         if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-        // При клике на празднование трек стартует
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-        }
     };
-    
+
     // Конфетти
     function showConfetti(count = 40) {
         const chars = ['■', '♦', '♥', '♫', '♪', '●', '◆'];
@@ -575,16 +370,33 @@
             }, 2600);
         }
     }
-    
+
+    // Винил — управление плеером (play/pause)
+    const audioPlayer = document.querySelector('audio');
+    const vinyl = document.getElementById('vinylPlayer');
+    if (vinyl && audioPlayer) {
+        vinyl.onclick = () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+            } else {
+                audioPlayer.pause();
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+            }
+        };
+    }
+
     // Кнопка закрытия
     document.getElementById('closeBtn').onclick = () => {
         tg.close();
     };
-    
+
     // Адаптация под тему Telegram
-    tg.onEvent('themeChanged', () => {
-        document.body.style.backgroundColor = tg.themeParams.bg_color || '#0c0f1c';
-    });
+    if (tg.onEvent) {
+        tg.onEvent('themeChanged', () => {
+            document.body.style.backgroundColor = tg.themeParams.bg_color || '#0c0f1c';
+        });
+    }
     
     console.log("Страница #2014 с музыкой загружена!");
 </script>
