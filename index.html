@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>#2014 — 1 год!</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+
+        body {
+            background: var(--tg-theme-bg-color, #0c0f1c);
+            font-family: 'Courier New', 'VT323', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.2s;
+        }
+
+        .card {
+            max-width: 680px;
+            width: 100%;
+            background: var(--tg-theme-secondary-bg-color, #0a0e17);
+            padding: 32px 24px 38px;
+            text-align: center;
+            border: 4px solid var(--tg-theme-button-color, #f0b34b);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.3);
+            position: relative;
+            margin: 16px;
+            border-radius: 0;
+        }
+
+        .hashtag {
+            font-size: 3.8rem;
+            font-weight: bold;
+            color: var(--tg-theme-text-color, #ffe0a3);
+            text-shadow: 4px 4px 0 #7a4f1a;
+            letter-spacing: 6px;
+        }
+
+        .sub {
+            font-size: 1.3rem;
+            color: var(--tg-theme-text-color, #ffdd99);
+            background: rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 6px 14px;
+            margin-bottom: 20px;
+            border: 2px solid var(--tg-theme-button-color, #f0b34b);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 1.7rem;
+            margin: 20px 0;
+            color: var(--tg-theme-text-color, #ffffff);
+            background: rgba(0,0,0,0.5);
+            padding: 12px;
+            border-left: 10px solid var(--tg-theme-button-color, #f7c56e);
+        }
+
+        .photo-container {
+            margin: 25px auto;
+            border: 5px solid var(--tg-theme-button-color, #f0b34b);
+            padding: 8px;
+            background: #000000;
+            display: inline-block;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+        }
+
+        .crew-photo {
+            max-width: 100%;
+            display: block;
+        }
+
+        .message {
+            background: rgba(0,0,0,0.7);
+            padding: 18px;
+            margin: 20px 0;
+            border: 2px solid var(--tg-theme-button-color, #f7c56e);
+            font-size: 1.1rem;
+            color: var(--tg-theme-text-color, #fff2cf);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .stat {
+            background: rgba(0,0,0,0.6);
+            padding: 8px 18px;
+            border: 2px solid var(--tg-theme-button-color, #f0b34b);
+            font-weight: bold;
+            color: var(--tg-theme-text-color, #ffefb0);
+            font-size: 1.1rem;
+        }
+
+        .stat span {
+            color: #ffcd74;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .pixel-vinyl {
+            width: 90px;
+            height: 90px;
+            background: #1e1a10;
+            margin: 16px auto;
+            border: 4px solid var(--tg-theme-button-color, #f7c56e);
+            position: relative;
+            cursor: pointer;
+            animation: spinPixel 5s infinite linear;
+        }
+
+        @keyframes spinPixel {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pixel-vinyl::after {
+            content: "♫";
+            font-size: 32px;
+            position: absolute;
+            top: 24px;
+            left: 26px;
+            color: #ffcf6e;
+        }
+
+        .btn {
+            background: #1f1b10;
+            border: 3px solid var(--tg-theme-button-color, #f7c56e);
+            color: var(--tg-theme-text-color, #ffeaac);
+            padding: 10px 28px;
+            margin: 10px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: 0.05s linear;
+        }
+
+        .btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+
+        .members {
+            margin: 25px 0 15px;
+            font-size: 1rem;
+            color: var(--tg-theme-text-color, #eeddbb);
+            background: rgba(0,0,0,0.6);
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .bottom-image {
+            margin: 30px 0 10px;
+            border: 3px solid var(--tg-theme-button-color, #f0b34b);
+            padding: 6px;
+            background: #000;
+            display: inline-block;
+        }
+
+        .bottom-image img {
+            max-width: 100%;
+            display: block;
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #aa9944;
+            padding-top: 16px;
+        }
+
+        /* Telegram close button */
+        .tg-close {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--tg-theme-button-color, #f0b34b);
+            color: var(--tg-theme-button-text-color, #000);
+            border: none;
+            padding: 10px 20px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="hashtag">#2014</div>
+    <div class="sub">14.06.2025 - ?</div>
+    <h1>⚡ С ДНЁМ РОЖДЕНИЯ, КОМАНДА! ⚡</h1>
+    <div class="photo-container">
+        <img class="crew-photo" src="https://iili.io/CBdX5NI.png" alt="#2014 Crew">
+    </div>
+    <div class="message">
+        ★ ГОД НАЗАД РОДИЛОСЬ НАШЕ ЗВУЧАНИЕ ★<br>
+        🎧 ТЕПЕРЬ МЫ — <strong style="color:#f7c56e;">#2014</strong> СЕМЬЯ 🎧
+    </div>
+    <div class="stats">
+        <div class="stat"><span>1</span> год</div>
+        <div class="stat"><span>12</span> месяцев</div>
+        <div class="stat"><span>365</span> дней</div>
+    </div>
+    <div class="pixel-vinyl" id="vinylPlayer"></div>
+    <div>
+        <button class="btn" id="celebrateBtn">🎮 1 ГОД!</button>
+        <button class="btn" id="sendDataBtn">📤 ОТПРАВИТЬ ПРИВЕТ БОТУ</button>
+    </div>
+    <div class="members">
+        <span>@ninthsin</span> · <span>@mynt</span> · <span>@uppedkid</span> · <span>@kingstrals</span> · <span>@vanian</span>
+    </div>
+    <div class="bottom-image">
+        <img src="https://iili.io/CBTsUaR.md.jpg" alt="Дополнительное изображение">
+    </div>
+    <footer>anything but 2014.<br><span style="font-size:0.7rem;">by ninthsin</span></footer>
+</div>
+<button class="tg-close" id="closeBtn">✖ ЗАКРЫТЬ</button>
+
+<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand(); // разворачиваем на весь экран
+    tg.ready();  // сообщаем, что приложение загружено
+
+    // --- Отправка данных боту ---
+    document.getElementById('sendDataBtn').onclick = () => {
+        tg.sendData(JSON.stringify({
+            action: 'greeting',
+            user: tg.initDataUnsafe?.user?.username || 'гость',
+            message: 'С ДНЁМ РОЖДЕНИЯ #2014!'
+        }));
+        tg.showAlert('Спасибо! Твоё поздравление улетело боту 🎉');
+    };
+
+    // --- Поздравление с конфетти ---
+    document.getElementById('celebrateBtn').onclick = () => {
+        showConfetti(60);
+        const msgDiv = document.querySelector('.message');
+        const original = msgDiv.innerHTML;
+        msgDiv.innerHTML = '◢◤◢◤ УРА, #2014 — ПЕРВЫЙ ГОД! ◢◤◢◤<br>НОВЫЕ ХИТЫ, ЖИВОЙ ЗВУК!';
+        setTimeout(() => { msgDiv.innerHTML = original; }, 2500);
+        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    };
+
+    // --- Конфетти ---
+    function showConfetti(count = 60) {
+        for (let i = 0; i < count; i++) {
+            const chars = ['■', '♦', '♥', '♫', '♪', '●', '◆'];
+            const el = document.createElement('div');
+            el.innerText = chars[Math.floor(Math.random() * chars.length)];
+            el.style.position = 'fixed';
+            el.style.left = Math.random() * 100 + '%';
+            el.style.top = '-50px';
+            el.style.fontSize = (Math.random() * 28 + 16) + 'px';
+            el.style.color = Math.random() > 0.5 ? '#ffcf6e' : '#b0ff90';
+            el.style.pointerEvents = 'none';
+            el.style.zIndex = '9999';
+            el.style.transition = 'transform 3s linear, opacity 2.5s';
+            document.body.appendChild(el);
+            setTimeout(() => {
+                el.style.transform = `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 400}deg)`;
+                el.style.opacity = '0';
+            }, 10);
+            setTimeout(() => el.remove(), 3100);
+        }
+    }
+
+    // --- Винил открывает аудио-плеер (embed Telegram) ---
+    const vinyl = document.getElementById('vinylPlayer');
+    vinyl.onclick = () => {
+        const embedUrl = 'https://t.me/twentyfourteenlyfestyle/107?embed=1';
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.style.width = '100%';
+        iframe.style.height = '200px';
+        iframe.style.border = 'none';
+        iframe.style.marginTop = '20px';
+        
+        const existing = document.querySelector('.dynamic-player');
+        if(existing) existing.remove();
+        iframe.className = 'dynamic-player';
+        vinyl.parentNode.insertBefore(iframe, vinyl.nextSibling);
+        
+        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    };
+
+    // --- Кнопка закрытия ---
+    document.getElementById('closeBtn').onclick = () => {
+        tg.close();
+    };
+
+    // --- Адаптация под тему Telegram ---
+    tg.onEvent('themeChanged', () => {
+        document.body.style.backgroundColor = tg.themeParams.bg_color || '#0c0f1c';
+    });
+</script>
+</body>
+</html>
