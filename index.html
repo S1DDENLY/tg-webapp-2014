@@ -7,6 +7,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen&display=swap" rel="stylesheet">
     <style>
+        /* все стили такие же, как в предыдущей версии */
         * {
             margin: 0;
             padding: 0;
@@ -703,12 +704,11 @@
     
     <div>
         <button class="btn" id="celebrateBtn">🎮 1 год</button>
-        <!-- 👇 ЭТА КНОПКА ТЕПЕРЬ ВЕДЁТ В TELEGRAM КАНАЛ 👇 -->
         <button class="btn" id="channelBtn">📤 быть с #2014</button>
     </div>
     
     <div class="members">
-        <span>ninthsin</span> <span>mynt</span> <span>uppedkid</span> <span>kingstrals</span> <span>vaniaxx</span>
+        <span>ninthsin</span> <span>mynt</span> <span>uppedkid</span> <span>astral king</span> <span>vaniaxx</span>
     </div>
     
     <div class="bottom-image">
@@ -742,7 +742,7 @@
         };
     }
 
-    // ========== НОВАЯ КНОПКА — ПЕРЕХОД В КАНАЛ ==========
+    // кнопка перехода в Telegram канал
     document.getElementById('channelBtn').onclick = () => {
         tg.openTelegramLink('https://t.me/twentyfourteenlyfestyle');
         tg.HapticFeedback?.impactOccurred('light');
@@ -967,7 +967,7 @@
         const msgDiv = document.querySelector('.message');
         if (msgDiv) {
             const original = msgDiv.innerHTML;
-            msgDiv.innerHTML = '🎉🎉🎉 #2014 — 1 ГОД! #14POCALYPSE 🎉🎉🎉<br>🔥🔥🔥 ТЫ ЧАСТЬ НАШЕЙ ИСТОРИИ! 🔥🔥🔥<br>👥 NINTHSIN · MYNT · UPPEDKID · KINGSTRALS · VANIAXX';
+            msgDiv.innerHTML = '🎉🎉🎉 #2014 — 1 ГОД! #14POCALYPSE 🎉🎉🎉<br>🔥🔥🔥 ТЫ ЧАСТЬ НАШЕЙ ИСТОРИИ! 🔥🔥🔥<br>👥 NINTHSIN · MYNT · UPPEDKID · ASTRAL KING · VANIAXX';
             setTimeout(() => { if (msgDiv) msgDiv.innerHTML = original; }, 3000);
         }
         tg.HapticFeedback?.impactOccurred('heavy');
@@ -976,7 +976,7 @@
 
     document.getElementById('closeBtn').onclick = () => tg.close();
 
-    console.log('🔥 #2014 — кнопка ведёт в Telegram канал');
+    console.log('🔥 #2014 — astral king');
 </script>
 </body>
 </html>
